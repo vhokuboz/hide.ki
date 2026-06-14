@@ -59,8 +59,13 @@ export function getPostBySlug(slug: string): Post | null {
 }
 
 export function getAllSlugs(): string[] {
-  return fs
-    .readdirSync(postsDir)
+  let files: string[];
+  try {
+    files = fs.readdirSync(postsDir);
+  } catch {
+    return [];
+  }
+  return files
     .filter((f) => f.endsWith(".md"))
     .map((f) => f.replace(/\.md$/, ""));
 }

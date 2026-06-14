@@ -47,21 +47,18 @@ export function Markdown({ content }: { content: string }) {
         li: ({ children }) => (
           <li className="text-[var(--color-muted)] marker:text-[var(--color-muted)]">{children}</li>
         ),
-        code: ({ className, children, ...props }) => {
+        code: ({ className, children }) => {
           const isInline = !className;
           if (isInline) {
             return (
-              <code
-                className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-1.5 py-0.5 font-mono text-sm text-[var(--color-primary)]"
-                {...props}
-              >
+              <code className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-1.5 py-0.5 font-mono text-sm text-[var(--color-primary)]">
                 {children}
               </code>
             );
           }
           return (
             <pre className="mb-4 overflow-x-auto rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 last:mb-0">
-              <code className="font-mono text-sm text-[var(--color-foreground)]" {...props}>
+              <code className="font-mono text-sm text-[var(--color-foreground)]">
                 {children}
               </code>
             </pre>

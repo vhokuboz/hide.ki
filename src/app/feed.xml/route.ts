@@ -1,5 +1,18 @@
 import { getAllPosts } from "@/lib/posts";
 
+function escapeXml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function escapeCdata(s: string): string {
+  return s.replace(/]]>/g, "]]]]><![CDATA[>");
+}
+
 export async function GET() {
   const posts = getAllPosts();
   const siteUrl = "https://hide.ki";
@@ -8,12 +21,12 @@ export async function GET() {
     .map(
       (p) => `
     <item>
-      <title><![CDATA[${p.title}]]></title>
-      <description><![CDATA[${p.desc}]]></description>
-      <link>${siteUrl}/blog/${p.slug}</link>
-      <guid>${siteUrl}/blog/${p.slug}</guid>
+      <title><![CDATA[${escapeCdata(p.title)}]]></title>
+      <description><![CDATA[${escapeCdata(p.desc)}]]></description>
+      <link>${siteUrl}/blog/${escapeXml(p.slug)}</link>
+      <guid>${siteUrl}/blog/${escapeXml(p.slug)}</guid>
       <pubDate>${new Date(p.date).toUTCString()}</pubDate>
-      ${p.tags.map((t) => `<category>${t}</category>`).join("\n      ")}
+      ${p.tags.map((t) => `<category>${escapeXml(t)}</category>`).join("\n      ")}
     </item>`,
     )
     .join("");
