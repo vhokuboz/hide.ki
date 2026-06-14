@@ -19,51 +19,51 @@
   "agent": {
     "code-reviewer": {
       "promptFile": ".opencode/agents/code-reviewer.md",
-      "tools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Edit",
-        "Bash",
-        "WebSearch"
-      ]
+      "tools": {
+        "Read": true,
+        "Grep": true,
+        "Glob": true,
+        "Edit": true,
+        "Bash": true,
+        "WebSearch": true
+      }
     },
     "build-error-resolver": {
       "promptFile": ".opencode/agents/build-error-resolver.md",
-      "tools": [
-        "Read",
-        "Bash",
-        "Grep",
-        "Glob",
-        "WebSearch"
-      ]
+      "tools": {
+        "Read": true,
+        "Bash": true,
+        "Grep": true,
+        "Glob": true,
+        "WebSearch": true
+      }
     },
     "refactor-cleaner": {
       "promptFile": ".opencode/agents/refactor-cleaner.md",
-      "tools": [
-        "Read",
-        "Grep",
-        "Glob",
-        "Edit",
-        "Bash"
-      ]
+      "tools": {
+        "Read": true,
+        "Grep": true,
+        "Glob": true,
+        "Edit": true,
+        "Bash": true
+      }
     },
     "tdd-guide": {
       "promptFile": ".opencode/agents/tdd-guide.md",
-      "tools": [
-        "Read",
-        "Edit",
-        "Bash",
-        "Grep",
-        "Glob",
-        "WebSearch"
-      ]
+      "tools": {
+        "Read": true,
+        "Edit": true,
+        "Bash": true,
+        "Grep": true,
+        "Glob": true,
+        "WebSearch": true
+      }
     }
   },
   "command": {
     "plan": {
       "description": "Create an implementation plan for a feature or change",
-      "promptFile": ".opencode/commands/plan.md",
+      "template": ".opencode/commands/plan.md",
       "model": "anthropic/claude-sonnet-4-5",
       "tools": [
         "Read",
@@ -74,7 +74,7 @@
     },
     "verify": {
       "description": "Run verification loop: lint, typecheck, build",
-      "promptFile": ".opencode/commands/verify.md",
+      "template": ".opencode/commands/verify.md",
       "tools": [
         "Bash",
         "Read"
@@ -82,7 +82,7 @@
     },
     "code-review": {
       "description": "Review staged or working changes for quality and security",
-      "promptFile": ".opencode/commands/code-review.md",
+      "template": ".opencode/commands/code-review.md",
       "tools": [
         "Bash",
         "Read",
@@ -93,7 +93,7 @@
     },
     "refactor-clean": {
       "description": "Find and remove dead code, unused exports, loose files",
-      "promptFile": ".opencode/commands/refactor-clean.md",
+      "template": ".opencode/commands/refactor-clean.md",
       "tools": [
         "Grep",
         "Glob",
@@ -101,6 +101,11 @@
         "Edit",
         "Bash"
       ]
+    },
+    "goal": {
+      "description": "Set a high-level objective for the session (like Claude Code's /goal)",
+      "template": ".opencode/commands/goal.md",
+      "model": "anthropic/claude-sonnet-4-5"
     }
   }
 }
