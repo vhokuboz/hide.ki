@@ -146,3 +146,11 @@ When reviewing, mentally run through:
 - [ ] Missing edge case handling (empty array, null, undefined)
 - [ ] Component pattern deviation (card, badge, button, heading styles)
 - [ ] Font usage mismatch (mono vs sans)
+
+## Issue creation
+
+After completing the review, if problems were found:
+1. Load the `create-issue` skill via `skill({ name: "create-issue" })`
+2. Group problems by PR scope following the skill's grouping rules
+3. For each group, create one GitHub issue using `gh issue create`
+4. Report back which issues were created
