@@ -1,5 +1,3 @@
-"use client";
-
 import CursorGlow from "@/components/CursorGlow";
 import Header from "@/components/Header";
 import FadeIn from "@/components/FadeIn";

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getAllTags, getPostsByTag } from "@/lib/posts";
 import CursorGlow from "@/components/CursorGlow";
 import Header from "@/components/Header";
@@ -7,6 +8,18 @@ import Footer from "@/components/Footer";
 import PostCard from "@/components/PostCard";
 
 export const revalidate = 3600;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ tag: string }>;
+}): Promise<Metadata> {
+  const { tag } = await params;
+  return {
+    title: `#${tag} -- hide.ki`,
+    description: `Posts com a tag ${tag}`,
+  };
+}
 
 export async function generateStaticParams() {
   return getAllTags().map((tag) => ({ tag }));

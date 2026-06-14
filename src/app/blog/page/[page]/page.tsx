@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getPostsPage } from "@/lib/posts";
 import CursorGlow from "@/components/CursorGlow";
 import Header from "@/components/Header";
@@ -7,6 +8,18 @@ import Footer from "@/components/Footer";
 import PostCard from "@/components/PostCard";
 
 export const revalidate = 3600;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ page: string }>;
+}): Promise<Metadata> {
+  const { page } = await params;
+  return {
+    title: `página ${page} -- hide.ki`,
+    description: `Blog do hide.ki — página ${page}`,
+  };
+}
 
 export async function generateStaticParams() {
   const { totalPages } = getPostsPage(1);
