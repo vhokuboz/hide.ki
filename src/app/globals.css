@@ -13,9 +13,20 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
+.light {
+  --color-background: #f4f4f8;
+  --color-foreground: #1a1a2e;
+  --color-primary: #0099cc;
+  --color-secondary: #cc0088;
+  --color-tertiary: #009966;
+  --color-surface: #ffffff;
+  --color-border: #d4d4e0;
+  --color-muted: #8888a0;
+}
+
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1e1e2a transparent;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 body {
@@ -24,7 +35,13 @@ body {
   font-family: var(--font-sans);
 }
 
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
 ::selection {
-  background: rgba(0, 240, 255, 0.2);
-  color: #00f0ff;
+  background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+  color: var(--color-primary);
 }
