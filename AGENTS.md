@@ -4,13 +4,26 @@
 - `npm run dev` — dev server
 - `npm run build` — production build
 - `npm run lint` — ESLint 9 flat config (`eslint.config.mjs`)
-- No test framework installed yet
+- `npm run test` — Vitest (unit/integration)
+- `npm run test:e2e` — Playwright (E2E)
 
 ## Architecture
 - **Next.js 16** App Router, TypeScript, Tailwind CSS 4
-- All routes under `src/app/`
+- Routes under `src/app/`: `/` (home), `/blog`, `/blog/[slug]`, `/about`
 - Path alias `@/*` → `./src/*`
-- No CI/CD, no env vars, no tests
+- Shared components in `src/components/` (Header, Footer, CursorGlow, FadeIn, PostCard, Markdown)
+- Posts as `.md` files in `content/posts/` with YAML frontmatter (title, desc, tags, date)
+- `src/lib/posts.ts` reads and parses posts via `gray-matter` (server-side only)
+- Markdown rendered with `react-markdown` + `remark-gfm` in `src/components/Markdown.tsx`
+- No CI/CD, no env vars
+
+When you need to search docs, use `context7` tools.
+
+## OpenCode config (`.opencode/`)
+- `opencode.json` — main config with agents, commands, instructions
+- `instructions/` — 6 skill files loaded as system prompts (coding-standards, frontend-patterns, verification-loop, api-design, security-review)
+- `agents/` — 4 subagents (code-reviewer, build-error-resolver, refactor-cleaner, tdd-guide)
+- `commands/` — 4 slash commands (/plan, /verify, /code-review, /refactor-clean)
 
 ## Tailwind CSS 4 quirks
 - Uses `@import "tailwindcss"` (not `@tailwind` directives)
@@ -22,8 +35,7 @@
 
 ## Conventions
 - Dark cyberpunk theme, cyan accent (`#00f0ff`), `font-mono` used heavily for labels/headings
-- `"use client"` on the home page (cursor glow, mouse tracking, intersection observer)
-- All current UI lives in `src/app/page.tsx` — consider splitting into components and routes
+- `"use client"` only on interactive components (HomeClient, CursorGlow, FadeIn, Post single page)
 
 ## Framework notes
 - ESLint 9 flat config format (not `.eslintrc.*`)

@@ -1,0 +1,58 @@
+{
+  "model": "anthropic/claude-sonnet-4-5",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "instructions": [
+    ".opencode/instructions/coding-standards.md",
+    ".opencode/instructions/frontend-patterns.md",
+    ".opencode/instructions/verification-loop.md",
+    ".opencode/instructions/api-design.md",
+    ".opencode/instructions/security-review.md"
+  ],
+  "agent": {
+    "code-reviewer": {
+      "promptFile": ".opencode/agents/code-reviewer.md",
+      "model": "anthropic/claude-sonnet-4-5",
+      "tools": ["Read", "Grep", "Glob", "Edit", "Bash"]
+    },
+    "build-error-resolver": {
+      "promptFile": ".opencode/agents/build-error-resolver.md",
+      "model": "anthropic/claude-sonnet-4-5",
+      "tools": ["Read", "Bash", "Grep", "Glob"]
+    },
+    "refactor-cleaner": {
+      "promptFile": ".opencode/agents/refactor-cleaner.md",
+      "model": "anthropic/claude-haiku-4-5",
+      "tools": ["Read", "Grep", "Glob", "Edit", "Bash"]
+    },
+    "tdd-guide": {
+      "promptFile": ".opencode/agents/tdd-guide.md",
+      "model": "anthropic/claude-sonnet-4-5",
+      "tools": ["Read", "Edit", "Bash", "Grep", "Glob"]
+    }
+  },
+  "command": {
+    "plan": {
+      "description": "Create an implementation plan for a feature or change",
+      "promptFile": ".opencode/commands/plan.md",
+      "model": "anthropic/claude-sonnet-4-5",
+      "tools": ["Read", "Grep", "Glob"]
+    },
+    "verify": {
+      "description": "Run verification loop: lint, typecheck, build",
+      "promptFile": ".opencode/commands/verify.md",
+      "tools": ["Bash", "Read"]
+    },
+    "code-review": {
+      "description": "Review staged or working changes for quality and security",
+      "promptFile": ".opencode/commands/code-review.md",
+      "model": "anthropic/claude-sonnet-4-5",
+      "tools": ["Bash", "Read", "Grep", "Glob"]
+    },
+    "refactor-clean": {
+      "description": "Find and remove dead code, unused exports, loose files",
+      "promptFile": ".opencode/commands/refactor-clean.md",
+      "model": "anthropic/claude-haiku-4-5",
+      "tools": ["Grep", "Glob", "Read", "Edit", "Bash"]
+    }
+  }
+}
