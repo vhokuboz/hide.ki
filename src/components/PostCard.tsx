@@ -13,6 +13,7 @@ export default function PostCard({ slug, title, desc, tags, date }: PostMeta) {
             <Link
               key={tag}
               href={`/tag/${tag}`}
+              aria-label={`filtrar por tag: ${tag}`}
               className="relative z-20 rounded-full border border-[var(--color-border)] px-2.5 py-0.5 font-mono text-[10px] tracking-wider text-[var(--color-muted)] uppercase transition-colors hover:border-[var(--color-primary)]/40 hover:text-[var(--color-primary)]"
             >
               {tag}

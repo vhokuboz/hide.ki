@@ -17,6 +17,7 @@ export default function Header() {
             <Link
               key={item}
               href={item === "home" ? "/" : `/${item}`}
+              aria-label={`ir para ${item === "home" ? "início" : item}`}
               className="hidden transition-colors hover:text-[var(--color-foreground)] sm:inline"
             >
               {item}
