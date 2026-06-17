@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { getPostsPage } from "@/lib/posts";
 import CursorGlow from "@/components/CursorGlow";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PostCard from "@/components/PostCard";
-
-export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -33,6 +32,8 @@ export default async function BlogPage({
 }: {
   params: Promise<{ page: string }>;
 }) {
+  "use cache";
+  cacheLife("hours");
   const { page: pageStr } = await params;
   const page = Number(pageStr);
   if (!Number.isInteger(page) || page < 1) notFound();

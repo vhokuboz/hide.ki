@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { getAllTags, getPostsByTag } from "@/lib/posts";
 import CursorGlow from "@/components/CursorGlow";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PostCard from "@/components/PostCard";
-
-export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -30,6 +29,8 @@ export default async function TagPage({
 }: {
   params: Promise<{ tag: string }>;
 }) {
+  "use cache";
+  cacheLife("hours");
   const { tag } = await params;
   const posts = getPostsByTag(tag);
   if (posts.length === 0) notFound();

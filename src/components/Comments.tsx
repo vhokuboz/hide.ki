@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 export default function Comments() {
   const appId = process.env.NEXT_PUBLIC_CUSDIS_APP_ID;
   const host = process.env.NEXT_PUBLIC_CUSDIS_HOST || "https://cusdis.com";
@@ -15,9 +17,9 @@ export default function Comments() {
         id="cusdis_thread"
         className="cusdis-empty"
       />
-      <script
-        defer
+      <Script
         src={`${host}/js/cusdis.es.js`}
+        strategy="lazyOnload"
       />
     </section>
   );

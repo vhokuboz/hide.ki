@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { getAllPosts } from "@/lib/posts";
 import SearchDialog from "@/components/SearchDialog";
 import "./globals.css";
@@ -29,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} antialiased`} suppressHydrationWarning>
       <head>
-        <script
+        <Script
+          id="theme-script"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {

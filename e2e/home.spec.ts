@@ -10,7 +10,8 @@ test.describe("Home page", () => {
     await page.goto("/");
     await page.getByRole("link", { name: "blog" }).first().click();
     await expect(page).toHaveURL("/blog");
-    await expect(page.locator("h2")).toContainText("todos os posts");
+    await expect(page.getByRole("heading", { name: "blog", level: 2 })).toBeVisible();
+    await expect(page.getByText("todos os posts", { exact: true })).toBeVisible();
   });
 
   test("shows latest posts section", async ({ page }) => {

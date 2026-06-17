@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { getAllSlugs, getPostBySlug } from "@/lib/posts";
 import { Markdown } from "@/components/Markdown";
 import CursorGlow from "@/components/CursorGlow";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Comments from "@/components/Comments";
-
-export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -42,6 +41,8 @@ export default async function PostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  "use cache";
+  cacheLife("hours");
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
